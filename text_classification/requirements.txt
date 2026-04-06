@@ -8,3 +8,7 @@ joblib
 matplotlib
 scikit-learn
 seaborn
+torchvision
+
+sentence_transformers
+community 
