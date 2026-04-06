@@ -5,3 +5,6 @@ model/weight/cs/*.pt
 
 
 __pycache__/
+*.pkl
+*.pktl
+*.joblib
