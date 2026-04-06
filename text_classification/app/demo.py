@@ -2,6 +2,11 @@ import streamlit as st
 import torch
 import numpy as np
 import plotly.express as px
+
+import sys
+project_path = os.path.join(os.getcwd(), "text_classification")
+sys.path.append(0, project_path)
+
 from logic.inference import InferenceEngine
 
 st.set_page_config(page_title="Doc Processor", layout="wide")
