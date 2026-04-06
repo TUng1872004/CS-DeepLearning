@@ -120,8 +120,8 @@ class InferenceEngine:
 
     def ensemble_predict(self, data, w_trans=0.7, threshold=0.3):
         start_time = time.time()
-        res_trans = self.predict(data, model_type='trans', override_thres=0)
-        res_lstm = self.predict(data, model_type='lstm', override_thres=0)
+        res_trans = self.predict(data, model_type='trans', thres=0)
+        res_lstm = self.predict(data, model_type='lstm', thres=0)
         
         aligned_lstm_probs = np.zeros(self.num_classes)
         aligned_lstm_probs[self.lstm_to_trans_map] = res_lstm['probs_raw']

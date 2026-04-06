@@ -10,7 +10,7 @@ from tqdm import tqdm
 import joblib
 import pandas as pd
 import ast
-
+from transformers import AutoTokenizer
 from eda.analyze import clean_tags
 from loader.lb_prep import get_mlb
 
@@ -102,4 +102,4 @@ def trans_loader_eur(model_name = 'sentence-transformers/all-MiniLM-L12-v2', pat
     print(f"Ready: Train {len(train_ds)} | Test {len(test_ds)}")
     print(f"Labels: {len(mlb.classes_)}")
 
-    return train_loader, test_loader, mlb, tokenizer
+    return train_loader, test_loader, mlb, tokenizer, id_to_title

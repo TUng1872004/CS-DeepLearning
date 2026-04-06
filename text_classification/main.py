@@ -31,7 +31,7 @@ def compare_with_gt(preds, gt_labels):
 
 
 from time import time
-def main():
+def inference():
 
     start = time()
     engine = InferenceEngine()
@@ -79,4 +79,21 @@ def main():
     trans_preds = engine.predict(test_data, model_type='trans', thres=0.4)
     compare_with_gt(trans_preds, gt_labels)
 
-main()
+def eval_zero_shot():
+    import torch 
+    from logic.base import base_model_eval
+    from model.trans import Trans
+    from loader.trans_loader import trans_loader_eur
+    # Load model, tokenizer, mlb, id_to_name
+    # Call eval_base_zero_shot with test_loader
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    model = Trans(device=device)
+    
+    from loader.trans_loader import trans_loader_eur
+    train_loader, test_loader, mlb, tokenizer , id_to_title= trans_loader_eur()
+    base_model_eval(model, test_loader, mlb, tokenizer,device, id_to_title
+                    )
+
+
+# inference()
+eval_zero_shot()

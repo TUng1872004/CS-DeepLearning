@@ -20,7 +20,10 @@ Under the instruction of **Dr. Lê Thành Sách**, our group explored advanced D
 * [📄 Full Technical Report (PDF)](./reports/assignment1.pdf)
 
 ---
-
+<iframe 
+    src="https://odoc-demo.streamlit.app/?embed=true" 
+    style="width:100%; height:850px; border:none;">
+</iframe>
 ## 🏆 Project Summaries & Achievements
 
 ### 1. Text Classification: LSTM vs. Transformer
