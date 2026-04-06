@@ -6,7 +6,7 @@ import plotly.express as px
 import sys
 import os
 project_path = os.path.join(os.getcwd(), "text_classification")
-sys.path.append(0, project_path)
+sys.path.insert(0, project_path)
 
 from logic.inference import InferenceEngine
 
