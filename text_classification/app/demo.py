@@ -37,7 +37,7 @@ recitals= """,
                     (12) The measures provided for in this Decision are in accordance with the opinion of the Standing Committee on the Food Chain and Animal Health,"""
 @st.cache_resource
 def load_engine():
-    return InferenceEngine()
+    return InferenceEngine(local = True)
 
 engine = load_engine()
 

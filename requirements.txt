@@ -12,3 +12,4 @@ torchvision
 
 sentence_transformers
 community 
+huggingface_hub

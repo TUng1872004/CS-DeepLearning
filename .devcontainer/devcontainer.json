@@ -22,9 +22,12 @@
       ]
     }
   },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
+  "remoteEnv": {
+    "PYTHONPATH": "${containerWorkspaceFolder}/text_classification"
+  },
+  "updateContentCommand": "pip3 install --user -r text_classification/requirements.txt && pip3 install --user streamlit && echo '✅ Requirements met'",
   "postAttachCommand": {
-    "server": "streamlit run text_classification/app/demo.py --server.enableCORS false --server.enableXsrfProtection false"
+    "server": "cd text_classification && streamlit run app/demo.py --server.enableCORS false --server.enableXsrfProtection false"
   },
   "portsAttributes": {
     "8501": {

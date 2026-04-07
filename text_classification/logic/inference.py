@@ -18,20 +18,24 @@ from eda.preprocess import clean, clean_legal
 
 from typing import Dict, Union
 class InferenceEngine:
-    def __init__(self, device=None, dataset= "eurlex"):
+    def __init__(self, device=None, dataset= "eurlex", local=False):
         self.device = device if device else torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        if dataset == "cs":
-             self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
-             self.mlb = joblib.load(self.mlb)
-             self.num_classes = len(self.mlb.classes_)
-             self.mlb_lstm = self.mlb
+        if local:
+            self.mlb , self.num_classes= get_mlb(f'data/{dataset}/mlb.{"pktl" if dataset == "eurlex" else "pkl"}')
+            self.mlb_lstm, self.n_lstm = get_mlb()
         else:
-            self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
-            self.mlb = joblib.load(self.mlb)
-            self.num_classes = len(self.mlb.classes_)
-            self.mlb_lstm = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb_lstm.pkl")
-            self.mlb_lstm = joblib.load(self.mlb_lstm)
-            self.n_lstm = len(self.mlb_lstm.classes_)
+            if dataset == "cs":
+                self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
+                self.mlb = joblib.load(self.mlb)
+                self.num_classes = len(self.mlb.classes_)
+                self.mlb_lstm = self.mlb
+            else:
+                self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
+                self.mlb = joblib.load(self.mlb)
+                self.num_classes = len(self.mlb.classes_)
+                self.mlb_lstm = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb_lstm.pkl")
+                self.mlb_lstm = joblib.load(self.mlb_lstm)
+                self.n_lstm = len(self.mlb_lstm.classes_)
         
         self.trans_conf = Trans_config()
         self.lstm_conf = LSTM_config()
