@@ -32,19 +32,19 @@ def get_resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 class InferenceEngine:
-    def __init__(self, device=None, dataset= "eurlex", local=False):
+    def __init__(self, device=None, dataset= "eurlex"):
         self.device = device if device else torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         self.dataset = dataset
       
-        if local:
+        try:
             path = get_resource_path(f'data/{dataset}/mlb.{"pktl" if dataset == "eurlex" else "pkl"}')
             self.mlb , self.num_classes= get_mlb(path)
             if dataset != "cs":
                 self.mlb_lstm, self.n_lstm = get_mlb(get_resource_path(f'data/{dataset}/mlb_lstm.pkl'))
             else:
                 self.mlb_lstm, self.n_lstm = self.mlb, self.num_classes
-        else:
+        except:
             if dataset == "cs":
                 self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
                 self.mlb = joblib.load(self.mlb)
