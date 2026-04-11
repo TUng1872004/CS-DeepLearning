@@ -46,7 +46,7 @@ class InferenceEngine:
                 self.mlb_lstm, self.n_lstm = self.mlb, self.num_classes
         except:
             if dataset == "cs":
-                self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
+                self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pkl")
                 self.mlb = joblib.load(self.mlb)
                 self.num_classes = len(self.mlb.classes_)
                 self.mlb_lstm = self.mlb
