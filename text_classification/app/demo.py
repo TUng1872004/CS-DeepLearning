@@ -53,8 +53,8 @@ def text_classifier():
     @st.cache_resource
     def load_engine():
         return {
-        "cs": InferenceEngine(local=True, dataset="cs"),
-        "eurlex": InferenceEngine(local=True, dataset="eurlex")
+        "cs": InferenceEngine(dataset="cs"),
+        "eurlex": InferenceEngine(dataset="eurlex")
     }
     engine= load_engine()
     mapping_dict = load_label_mapping("eurlex")
