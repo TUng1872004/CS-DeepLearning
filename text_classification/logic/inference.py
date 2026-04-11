@@ -50,6 +50,7 @@ class InferenceEngine:
                 self.mlb = joblib.load(self.mlb)
                 self.num_classes = len(self.mlb.classes_)
                 self.mlb_lstm = self.mlb
+                self.n_lstm = self.num_classes
             else:
                 self.mlb = hf_hub_download(repo_id="TungDKS/XMC", filename="mlb.pktl")
                 self.mlb = joblib.load(self.mlb)
@@ -178,7 +179,7 @@ class InferenceEngine:
         
         aligned_lstm_probs = np.zeros(self.num_classes)
         if self.dataset:
-            aligned_lstm_probs[self.lstm_to_trans_map] = res_lstm['probs_raw']
+             aligned_lstm_probs[self.lstm_to_trans_map] = res_lstm['probs_raw']
         
         combined_probs = (w_trans * res_trans['probs_raw']) + ((1 - w_trans) * aligned_lstm_probs)
         
