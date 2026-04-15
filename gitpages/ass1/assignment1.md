@@ -17,7 +17,7 @@ Under the instruction of **Dr. Lê Thành Sách**, our group explored advanced D
 ### 🔗 Quick Resources
 * [💻 GitHub Source Code](link)
 * [📺 Presentation Video (Not available yet)](link) 
-* [📄 Full Technical Report (PDF)](./reports/assignment1.pdf)
+* [📄 Full Technical Report (PDF)](../../reports/assignment1.pdf)
 
 ---
 
@@ -26,7 +26,7 @@ Under the instruction of **Dr. Lê Thành Sách**, our group explored advanced D
 ### 1. Extreme Multi-Label Text Classification: BiLSTM vs. Transformer
 **Author:** Vũ Hoàng Tùng  
 
-**Full Report:** [Report on Text Classification.pdf](./reports/ass1_text.pdf)
+**Full Report:** [Report on Text Classification.pdf](../../reports/ass1_text.pdf)
 
 **Live Demo:** [Link](./tc_demo.md)
 
@@ -40,7 +40,7 @@ Classifying long-form documents within a high-dimensional label space ($10^3$–
 * **Long-Tail Recovery:** Achieved a **974x gradient amplification** for rare labels, increasing Macro-F1 from 0.03 (Vanilla) to **0.25**.
 * **Semantic Precision:** Demonstrated superior entity detection (e.g., "Singapore", "Commission") using Attention Rollout to ignore redundant legal jargon.
 
-#### **Performance Benchmark [page 27](./reports/ass1_text.pdf#page=27)**
+#### **Performance Benchmark [page 27](../../reports/ass1_text.pdf#page=27)**
 
 | Metric | Vanilla MiniLM | BiLSTM-ASLCB | **Trans-ASLCB (Ours)** |
 | :--- | :---: | :---: | :---: |
@@ -51,9 +51,9 @@ Classifying long-form documents within a high-dimensional label space ($10^3$–
 | **Hamming Loss** | 0.00160 | **0.00076** | 0.00085 |
 
 #### **Technical Highlights**
-* **Context Window:** Expanded from 512 to **1024 tokens** via multi-segment feature fusion (Title + Body) + (Recitals). [page 20](./reports/ass1_text.pdf#page=20)
-* **Optimization:** Training specialized classifier solving extreme class imbalance via **Asymmetric Loss** and **Class Balancing Weight** achieve Macro F1 SOTA. [page 27](./reports/ass1_text.pdf#page=27)
-* **Stratergy:** Utilized **Semantic Warm-start** finetune stratergy to guide the model's "semantic compass" from Epoch 1. [page 27](./reports/ass1_text.pdf#page=24)
+* **Context Window:** Expanded from 512 to **1024 tokens** via multi-segment feature fusion (Title + Body) + (Recitals). [page 20](../../reports/ass1_text.pdf#page=20)
+* **Optimization:** Training specialized classifier solving extreme class imbalance via **Asymmetric Loss** and **Class Balancing Weight** achieve Macro F1 SOTA. [page 27](../../reports/ass1_text.pdf#page=27)
+* **Stratergy:** Utilized **Semantic Warm-start** finetune stratergy to guide the model's "semantic compass" from Epoch 1. [page 27](../../reports/ass1_text.pdf#page=24)
 * **Efficiency:** Achieved near SOTA-level precision ($P@1 > 0.88$) using a lightweight 33M parameter backbone, significantly reducing inference latency.
 
 #### **Limitations**
@@ -66,7 +66,7 @@ Classifying long-form documents within a high-dimensional label space ($10^3$–
 
 ### 2. Image Classification: CNN vs. ViT
 **Author:** Vũ Minh Quân
-* 👉 [Read Full Image Analysis (PDF Page 7)](./reports/assignment1.pdf#page=7)
+* 👉 [Read Full Image Analysis (PDF Page 7)](../../reports/assignment1.pdf#page=7)
 
 #### **Abstract**
 Evaluated traditional Convolutional Neural Networks (ResNet) against Vision Transformers (ViT) using airplane dataset. 
@@ -80,7 +80,7 @@ Evaluated traditional Convolutional Neural Networks (ResNet) against Vision Tran
 
 ### 3. Multimodal: Zero-shot vs. Few-shot
 **Author:** [Name]
-* 👉 [Read Multimodal Analysis (PDF Page 12)](./reports/assignment1.pdf#page=12)
+* 👉 [Read Multimodal Analysis (PDF Page 12)](../../reports/assignment1.pdf#page=12)
 
 #### **Abstract**
 Applied the **CLIP** model to genuine image-text pairs (Flickr30k) to compare Zero-shot performance against Few-shot fine-tuning[cite: 44, 60].
@@ -95,5 +95,5 @@ Few-shot fine-tuning with only 16 samples per class increased accuracy from **72
 ### 🛠 Extensions (Bonus 40%)
 * **Interpretability:** Integrated Grad-CAM and Attention Maps to visualize model decisions.
 * **Efficiency:** Applied 8-bit Model Quantization, reducing the Transformer size by 3.8x with <1% accuracy loss[cite: 75].
-* 👉 [Read Extension Details (PDF Page 15)](./reports/assignment1.pdf#page=15)
+* 👉 [Read Extension Details (PDF Page 15)](../../reports/assignment1.pdf#page=15)
 
