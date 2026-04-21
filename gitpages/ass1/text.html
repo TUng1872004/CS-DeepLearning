@@ -82,11 +82,11 @@
 
                 <h4>Methodology and Technical Highlights</h4>
                 <ul>
-                    <li><b>Context Window:</b> Expanded from 512 to <b>1024 tokens</b> via multi-segment feature fusion (Title + Body) + (Recitals). <a href="../../reports/ass1_text.pdf#page=20" target="_blank" rel="noopener noreferrer" class="pdf-link">page 20</a></li>
-                    <li><b>Loss Engineering:</b> Implemented <b>Asymmetric Loss (ASL)</b> to suppress negative-class dominance (4,187 negative labels per doc). <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link">page 22</a></li>
-                    <li><b>Long-Tail Recovery:</b> Apply <b>Weight balancing</b> for rare labels (Consist of < 0.001 %) <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link">page 22</a></li>
-                    <li><b>Training Strategy:</b> Utilized <b>Semantic Warm-start</b> finetune strategy to guide the model’s “semantic compass” from Epoch 1. <a href="../../reports/ass1_text.pdf#page=24" target="_blank" rel="noopener noreferrer" class="pdf-link">page 24</a></li>
-                    <li><b>Efficiency:</b> Achieved near SOTA-level precision ($P@1 > 0.88$) using a lightweight 33M parameter backbone, significantly reducing inference latency.<a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">page 27</a></li>
+                    <li><b>Context Window:</b> Expanded from 512 to <b>1024 tokens</b> via multi-segment feature fusion (Title + Body) + (Recitals). <a href="../../reports/ass1_text.pdf#page=20" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20] </a></li>
+                    <li><b>Loss Engineering:</b> Implemented <b>Asymmetric Loss (ASL)</b> to suppress negative-class dominance (4,187 negative labels per doc). <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20. 21] </a></li>
+                    <li><b>Long-Tail Recovery:</b> Apply <b>Weight balancing</b> for rare labels (Consist of < 0.001 %) <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20, 21]</a></li>
+                    <li><b>Training Strategy:</b> Utilized <b>Semantic Warm-start</b> finetune strategy to guide the model’s “semantic compass” from Epoch 1. <a href="../../reports/ass1_text.pdf#page=24" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 21] </a></li>
+                    <li><b>Efficiency:</b> Achieved near SOTA-level precision ($P@1 > 0.88$) using a lightweight 33M parameter backbone, significantly reducing inference latency.<a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 27]</a></li>
                 </ul>
 
                 <h4>Performance Benchmark <a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">[page 27]</a></h4>
