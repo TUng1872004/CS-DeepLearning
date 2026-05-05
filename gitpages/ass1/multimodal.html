@@ -62,33 +62,30 @@
                 <i class="fas fa-arrow-left mr-2"></i> Back to Module Dashboard
             </a>
 
-            <h1 class="mt-8">Text Classification: <span class="text-sky-500">Odoc Tagger</span></h1>
+            <h1 class="mt-8">Image Classification: <span class="text-sky-500">FGVC-Aircraft Benchmark</span></h1>
 
             <section id="summary">
                 <h2>🏆 Project Summaries & Achievements</h2>
-                
-                <p><b>Author:</b> Vũ Hoàng Tùng</p>
-                <p><b>Full Report:</b> <a href="../../reports/ass1_text.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Report on Text Classification.pdf</a></p>
+
+                <p><b>Author:</b> Vũ Minh Quân</p>
+                <p><b>Full Report:</b> <a href="../../reports/ass1_image.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Report on Image Classification.pdf</a></p>
 
                 <h4>Abstract</h4>
-                <p>Classifying long-form documents within a high-dimensional label space (10^3–10^6) has been always a formiddable challenge, yet has been needed for solution more than ever, due to the non-stop accumulation of documents, papers of complex domain with many topic overlap. As such a field called XMC. This study benchmarks <b>BiLSTM-Attention</b> and <b>Transformer-based Encoders</b> on their ability to handle semantic overlap and document length in the <b>Eurlex57k</b> dataset.</p>
+                <p>Write here ........................................................</p>
 
                 <h4>Key Achievements</h4>
                 <ul>
                     <li><b>Pipeline Design:</b> Developed a multi-segment Transformer backbone (1024 tokens), expanding context window for long legal documents.</li>
-                    <li><b>Deep Learning Application:</b> Combining finetuning with ultilized classification head training, increasing Macro-F1 from 0.03 (Vanilla) to <b>0.25</b>. <a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">page 27</a></li>
-                    <li><b>Semantic Precision:</b> Demonstrated superior entity detection (e.g., “Singapore”, “Commission”, "Commitee") using Attention Rollout to ignore redundant legal jargon.<a href="../../reports/ass1_text.pdf#page=28" target="_blank" rel="noopener noreferrer" class="pdf-link">page 28</a></li>
+                    <li><b>Deep Learning Application:</b> Combining finetuning with ultilized classification head training, increasing Macro-F1 from 0.03 (Vanilla) to <b>0.25</b>. <a href="../../reports/ass1_image.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">page 27</a></li>
+                    <li><b>Semantic Precision:</b> Demonstrated superior entity detection (e.g., “Singapore”, “Commission”, "Commitee") using Attention Rollout to ignore redundant legal jargon.<a href="../../reports/ass1_image.pdf#page=28" target="_blank" rel="noopener noreferrer" class="pdf-link">page 28</a></li>
                 </ul>
 
                 <h4>Methodology and Technical Highlights</h4>
                 <ul>
-                    <li><b>Context Window:</b> Expanded from 512 to <b>1024 tokens</b> via multi-segment feature fusion (Title + Body) + (Recitals). <a href="../../reports/ass1_text.pdf#page=20" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20] </a></li>
-                    <li><b>Loss Engineering:</b> Implemented <b>Asymmetric Loss (ASL)</b> to suppress negative-class dominance (4,187 negative labels per doc). <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20. 21] </a></li>
-                    <li><b>Long-Tail Recovery:</b> Apply <b>Weight balancing</b> for rare labels (Consist of < 0.001 %) <a href="../../reports/ass1_text.pdf#page=22" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 20, 21]</a></li>
-                    <li><b>Training Strategy:</b> Utilized <b>Semantic Warm-start</b> finetune strategy to guide the model’s “semantic compass” from Epoch 1. <a href="../../reports/ass1_text.pdf#page=24" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 21] </a></li>
-                    <li><b>Efficiency:</b> Achieved near SOTA-level precision ($P@1 > 0.88$) using a lightweight 33M parameter backbone, significantly reducing inference latency.<a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link"> [page 27]</a></li>
+                    <li>Write here ........................................................</li>
+                    <li>And here ........................................................</li>
                 </ul>
-
+                <!-- Add result table if possible
                 <h4>Performance Benchmark <a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">[page 27]</a></h4>
                 <div class="table-wrapper">
                     <table>
@@ -113,17 +110,14 @@
                         </tbody>
                     </table>
                 </div>
-
+                -->
                 <h4>Limitations</h4>
                 <ul>
-                    <li>Defeated by RoBERTa (upon trained it uploaded as LegalBERT) on nearly every other Metric than Macro F1 and P@3 due to lower Recall rate (we likely need to moderate weights better).</li>
-                    <li>Confidence logs shows that models only show certainty in top 3-5 labels.</li>
-                    <li>Finetune boost final precision strongly however are fast to concave. Maybe Mini-LM-L12-v2 has been salturated upon too many epoch. We fix this by dynamic training stratergy, however requires many epochs for head to adapt</li>
+                    <li>Write here ........................................................</li>
+                    <li>And here ........................................................</li>
                 </ul>
 
-                <p class="italic text-sm text-slate-500 mt-8">
-                    *Note: Our results prove that a "Lightweight Transformer + Advanced Loss" approach still yields high-precision results while maintaining resource efficiency.
-                </p>
+            
             </section>
 
             <section id="demo" class="mt-24">
@@ -140,6 +134,7 @@
                     </h4>
                     <div class="max-w-4xl mx-auto shadow-2xl shadow-sky-200/50 rounded-[2rem] overflow-hidden border-2 border-sky-100 bg-white">
                         <div class="relative w-full" style="height: 600px;">
+                            <!-- Replace with your actual Streamlit app URL -->
                             <iframe 
                                 src="https://odoctagger-v1.streamlit.app/?embed=true" 
                                 class="absolute top-0 left-0 w-full h-full border-none"
@@ -152,31 +147,11 @@
                     </p>
                 </div>
 
-                <div class="bg-white/50 p-8 rounded-[2.5rem] border border-sky-100 backdrop-blur-sm">
-                    <h4 class="text-sky-600 font-bold mb-4 uppercase tracking-widest text-xs italic">
-                        <i class="fas fa-eye mr-2"></i> On-the-fry Analysis 
-                    </h4>
-                    <p class="text-slate-600 leading-relaxed mb-8">
-                        For Transformer, we provide visualization using <b>Attention Rollout</b>. The attention weight of tokens in the matrix are taken and plotted with mapped tokens to show significant tokens within provided texts, allowing us to understand the model's "internal compass."
-                    </p>
-
-                    <figure class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="../../reports/img/att_r.png" alt="Attention Rollout Visualization" class="w-full h-auto hover:scale-[1.01] transition-transform duration-500">
-                        </div>
-                        <figcaption class="text-center text-slate-500 text-sm mt-4 font-medium italic">
-                            <b>Figure 1:</b> Attention Roll_out. The redder the colour, the more focused the model on that token.
-                        </figcaption>
-                    </figure>
-                    <p class="text-slate-600 leading-relaxed mb-8">
-                        This analysis proves that model are capable to focus more on entities like <b>Singapore</b> and <b>commission</b> (shown as red), while ignoring dates, numbers or grammar word (shown as white), however both attention rollout and weight shows that model is not confident when there are more than 3 tags. Access Full Screen Website <a href="https://odoctagger-v1.streamlit.app/" target="_blank" rel="noopener noreferrer" class="pdf-link">Here</a>                    </p>
-
-                </div>
             </section>
 
             <section id="eda" class="mt-32 pb-20">
                 <h2>📊 Exploratory Data Analysis (EDA)</h2>
-                <p>Exploratory Data Analysis on Eurlex57k...</p>
+                <p>Exploratory Data Analysis on (Write here)...</p>
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-8 mt-8">
                     <div class="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm">
                         <p class="text-lg font-bold text-sky-500 uppercase mb-4">Data Distribution</p>
