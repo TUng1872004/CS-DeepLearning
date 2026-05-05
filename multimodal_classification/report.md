@@ -2,7 +2,7 @@
 
 Multimodal: Zero-shot vs. Few-shot\
 Author: Nguyen Viet Hoang
-
+ 
 ## Abstract
 Apply the **CLIP** model with classification head added to accurately classify image-text pairs belong to a class. Compare zero-shot performance against few-shot fine-tuning.
 
