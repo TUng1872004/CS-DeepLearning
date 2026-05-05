@@ -118,6 +118,7 @@
                 <ul>
                     <li>Defeated by RoBERTa (upon trained it uploaded as LegalBERT) on nearly every other Metric than Macro F1 and P@3 due to lower Recall rate (we likely need to moderate weights better).</li>
                     <li>Confidence logs shows that models only show certainty in top 3-5 labels.</li>
+                    <li>LWA (Label-wise Attention) is likely not be effective with few shots and small model</li>
                     <li>Finetune boost final precision strongly however are fast to concave. Maybe Mini-LM-L12-v2 has been salturated upon too many epoch. We fix this by dynamic training stratergy, however requires many epochs for head to adapt</li>
                 </ul>
 
