@@ -11,11 +11,10 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #f0f9ff; /* Sky Blue Light */
+            background: #f0f9ff;
             color: #1e293b;
         }
 
-        /* --- NATIVE MARKDOWN STYLE --- */
         .md-view h1 { font-size: 2.8rem; font-weight: 800; color: #0c4a6e; margin-bottom: 1.5rem; }
         .md-view h2 { font-size: 1.8rem; font-weight: 700; color: #0369a1; border-bottom: 2px solid #bae6fd; padding-bottom: 0.5rem; margin-top: 4rem; margin-bottom: 1.5rem; }
         .md-view h3 { font-size: 1.4rem; font-weight: 700; color: #0c4a6e; margin-top: 2.5rem; margin-bottom: 1rem; }
@@ -25,7 +24,6 @@
         .md-view li { margin-bottom: 0.6rem; }
         .md-view b, .md-view strong { color: #0c4a6e; font-weight: 700; }
 
-        /* TABLE STYLING */
         .table-wrapper { overflow-x: auto; margin: 2rem 0; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .md-view table { width: 100%; border-collapse: collapse; background: white; }
         .md-view th, .md-view td { padding: 0.85rem; border: 1px solid #e2e8f0; text-align: left; font-size: 0.85rem; }
@@ -33,11 +31,14 @@
         .highlight-row { background-color: #f0f9ff !important; font-weight: 600; }
 
         .pdf-link { color: #0284c7; text-decoration: underline; font-weight: bold; }
+        .image-card { background: white; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #e0f2fe; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .image-card img { width: 100%; height: auto; border-radius: 0.75rem; border: 1px solid #f1f5f9; }
+        .image-card p { margin-top: 1rem; font-size: 0.9rem; font-weight: 600; color: #0369a1; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="max-w-[1000px] mx-auto px-6 py-16">
+    <div class="max-w-[1100px] mx-auto px-6 py-16">
         <div class="md-view">
             <a href="./assignment1.html" style="text-decoration:none" class="text-sky-600 font-bold text-xs uppercase tracking-widest hover:underline">
                 Back to Module Dashboard
@@ -46,7 +47,7 @@
             <h1 class="mt-8">Image Classification: <span class="text-sky-500">FGVC-Aircraft Benchmark</span></h1>
 
             <section id="summary">
-                <h2>🏆 Project Summaries & Achievements</h2>
+                <h2>Project Summaries & Achievements</h2>
 
                 <p><b>Author:</b> Vũ Minh Quân</p>
                 <p><b>Full Report:</b> <a href="../../reports/ass1_image.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Report on Image Classification.pdf</a></p>
@@ -66,70 +67,102 @@
                     <li><b>Layer-wise LR Decay:</b> Assigned hierarchical learning rates (decay=0.65) to Transformer blocks to protect low-level features.</li>
                     <li><b>Augmentation Robustness:</b> Evaluated RandAugment impacts, finding that strong augmentation requires >40 epochs to surpass light regimes.</li>
                 </ul>
-                <h4>Performance Benchmark (50 Epochs)</h4>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Model</th>
-                                <th>Strategy</th>
-                                <th>Augmentation</th>
-                                <th>Test Acc (%)</th>
-                                <th>Inference (ms)</th>
-                                <th>Params (M)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ResNet50</td><td>Full Fine-tune</td><td>Strong</td><td>84.9 ± 0.5</td><td>1.52</td><td>23.71</td></tr>
-                            <tr><td>ResNet50</td><td>LLRD</td><td>Light</td><td>81.8 ± 0.5</td><td>1.52</td><td>23.71</td></tr>
-                            <tr class="highlight-row"><td>ViT-B/16</td><td>Full Fine-tune</td><td>Strong</td><td>87.8 ± 0.3</td><td>4.65</td><td>85.88</td></tr>
-                            <tr class="highlight-row"><td>ViT-B/16</td><td>LLRD (Best)</td><td>Light</td><td><b>88.9 ± 0.2</b></td><td>4.65</td><td>85.88</td></tr>
-                            <tr><td>Ensemble</td><td>Softmax Avg</td><td>Mixed</td><td>86.2 ± 0.3</td><td>~6.17</td><td>109.59</td></tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <h4>Limitations</h4>
-                <ul>
-                    <li>ResNet50 plateaus earlier than ViT, suggesting a lower capacity for complex fine-grained features.</li>
-                    <li>ViT models exhibit 3x higher inference latency, making them less ideal for real-time mobile deployment.</li>
-                </ul>
+                <h4>Performance Comparison</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.16.png">
+                        <p>Training and Validation Accuracy Curves</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.17.png">
+                        <p>Training and Validation Loss Curves</p>
+                    </div>
+                </div>
             </section>
 
             <section id="eda" class="mt-32">
                 <h2>Exploratory Data Analysis (EDA)</h2>
-                <p>Comprehensive analysis of the FGVC-Aircraft dataset structure, including variant distributions and visual feature mapping.</p>
+                <p>Detailed analysis of the aircraft dataset, showing the distribution of images across manufacturers and the complexity of the feature space.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                    <div class="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm">
-                        <p class="text-sm font-bold text-sky-500 uppercase mb-4">Manufacturer Distribution</p>
-                        <div class="bg-slate-50 rounded-2xl flex items-center justify-center">
-                            <img src="../../image_classification/image/fig1.3.png" class="w-full h-auto rounded-xl">
-                        </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.3.png">
+                        <p>Manufacturer Distribution</p>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm">
-                        <p class="text-sm font-bold text-sky-500 uppercase mb-4">Latent Feature Space (UMAP)</p>
-                        <div class="bg-slate-50 rounded-2xl flex items-center justify-center">
-                            <img src="../../image_classification/image/fig1.5.png" class="w-full h-auto rounded-xl">
-                        </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.5.png">
+                        <p>Latent Feature Space Visualization (UMAP)</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.6.png">
+                        <p>Sample Aircraft Images</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.7.png">
+                        <p>Edge Detection Features</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.8.png">
+                        <p>Color Histogram Analysis</p>
                     </div>
                 </div>
             </section>
 
-            <section id="interpretability" class="mt-32 pb-20">
-                <h2>Visual Interpretability</h2>
-                <p>Using Grad-CAM and Attention Rollout to visualize the spatial regions that most influenced the model's predictions.</p>
+            <section id="interpretability" class="mt-32">
+                <h2>Model Interpretability</h2>
+                <p>Visualizing where the models look when making predictions to ensure they are learning relevant aircraft features rather than background noise.</p>
                 
-                <div class="grid grid-cols-1 gap-12 mt-8">
-                    <div class="bg-white p-8 rounded-3xl border border-sky-100 shadow-sm">
-                        <h4 class="mb-4">Grad-CAM (ResNet50)</h4>
-                        <p class="text-sm text-slate-600 mb-6">Visualizing feature focus on structural components like engines and wings for correct predictions.</p>
-                        <img src="../../image_classification/image/fig1.13.png" class="w-full h-auto rounded-2xl border border-slate-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
+                    <div class="image-card">
+                        <h4>Grad-CAM (ResNet50)</h4>
+                        <img src="../../image_classification/image/fig1.13.png" class="mt-4">
+                        <p>CNN Focus on Local Structural Features</p>
                     </div>
+                    <div class="image-card">
+                        <h4>Attention Rollout (ViT-B/16)</h4>
+                        <img src="../../image_classification/image/fig1.14.png" class="mt-4">
+                        <p>Transformer Global Silhouette Focus</p>
+                    </div>
+                </div>
+            </section>
 
-                    <div class="bg-white p-8 rounded-3xl border border-sky-100 shadow-sm">
-                        <h4 class="mb-4">Attention Rollout (ViT-B/16)</h4>
-                        <p class="text-sm text-slate-600 mb-6">Demonstrating global silhouette focus across the Transformer layers.</p>
-                        <img src="../../image_classification/image/fig1.14.png" class="w-full h-auto rounded-2xl border border-slate-100">
+            <section id="results" class="mt-32 pb-20">
+                <h2>Detailed Results and Tables</h2>
+                <p>Numerical performance metrics across different configurations and experimental setups.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="image-card">
+                        <img src="../../image_classification/image/tab1.1.png">
+                        <p>Dataset Summary</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/tab1.2.png">
+                        <p>Linear Probing Results</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/tab1.3.png">
+                        <p>Full Fine-Tuning Performance</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/tab1.5.png">
+                        <p>LLRD Strategy Comparison</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.9.png">
+                        <p>Confusion Matrix (ResNet)</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.10.png">
+                        <p>Confusion Matrix (ViT)</p>
+                    </div>
+                    <div class="image-card">
+                        <img src="../../image_classification/image/fig1.12.png">
+                        <p>Class-wise Accuracy</p>
                     </div>
                 </div>
             </section>
