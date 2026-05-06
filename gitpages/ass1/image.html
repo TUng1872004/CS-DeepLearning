@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Classification | Deep Dive</title>
+    <title>Image Classification | Deep Dive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -71,50 +71,47 @@
                 <p><b>Full Report:</b> <a href="../../reports/ass1_image.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Report on Image Classification.pdf</a></p>
 
                 <h4>Abstract</h4>
-                <p>Write here ........................................................</p>
+                <p>Fine-grained visual classification (FGVC) focuses on distinguishing between highly similar sub-categories within a broad category. This project benchmarks <b>ResNet50</b> (CNN) and <b>ViT-B/16</b> (Vision Transformer) on the <b>FGVC-Aircraft</b> dataset, evaluating three fine-tuning strategies: Linear Probing, Full Fine-Tuning, and Layer-wise Learning Rate Decay (LLRD). We investigate how architectural inductive biases and hierarchical optimization impact performance on 100 aircraft variants.</p>
 
                 <h4>Key Achievements</h4>
                 <ul>
-                    <li><b>Pipeline Design:</b> Developed a multi-segment Transformer backbone (1024 tokens), expanding context window for long legal documents.</li>
-                    <li><b>Deep Learning Application:</b> Combining finetuning with ultilized classification head training, increasing Macro-F1 from 0.03 (Vanilla) to <b>0.25</b>. <a href="../../reports/ass1_image.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">page 27</a></li>
-                    <li><b>Semantic Precision:</b> Demonstrated superior entity detection (e.g., “Singapore”, “Commission”, "Commitee") using Attention Rollout to ignore redundant legal jargon.<a href="../../reports/ass1_image.pdf#page=28" target="_blank" rel="noopener noreferrer" class="pdf-link">page 28</a></li>
+                    <li><b>Model Crossover:</b> Identified the "crossover point" at 30 epochs where ViT overtakes ResNet in representation quality.</li>
+                    <li><b>Optimization Excellence:</b> Achieved a peak test accuracy of <b>88.9%</b> using ViT-B/16 combined with LLRD and extended training (50 epochs).</li>
+                    <li><b>Interpretability:</b> Successfully mapped discriminative features (engines, wingtips) using Grad-CAM and Attention Rollout, validating model focus.</li>
                 </ul>
 
                 <h4>Methodology and Technical Highlights</h4>
                 <ul>
-                    <li>Write here ........................................................</li>
-                    <li>And here ........................................................</li>
+                    <li><b>Layer-wise LR Decay:</b> Assigned hierarchical learning rates (decay=0.65) to Transformer blocks to protect low-level features.</li>
+                    <li><b>Augmentation Robustness:</b> Evaluated RandAugment impacts, finding that strong augmentation requires >40 epochs to surpass light regimes.</li>
                 </ul>
-                <!-- Add result table if possible
-                <h4>Performance Benchmark <a href="../../reports/ass1_text.pdf#page=27" target="_blank" rel="noopener noreferrer" class="pdf-link">[page 27]</a></h4>
+                <h4>Performance Benchmark (50 Epochs)</h4>
                 <div class="table-wrapper">
                     <table>
                         <thead>
                             <tr>
                                 <th>Model</th>
-                                <th>Micro F1</th>
-                                <th>Macro F1</th>
-                                <th>P@1</th>
-                                <th>R@1</th>
-                                <th>nDCG@5</th>
-                                <th>Hamming</th>
+                                <th>Strategy</th>
+                                <th>Augmentation</th>
+                                <th>Test Acc (%)</th>
+                                <th>Inference (ms)</th>
+                                <th>Params (M)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>RoBERTa* (SOTA)</td><td>0.6850</td><td>0.2200</td><td>0.9220</td><td>0.2100</td><td>0.8230</td><td>--</td></tr>
-                            <tr><td>BIGRU-LWAN (L2V)</td><td>0.6120</td><td>0.1850</td><td>0.9130</td><td>0.1980</td><td>0.8040</td><td>--</td></tr>
-                            <tr><td>HAN</td><td>0.5840</td><td>0.1420</td><td>0.8940</td><td>0.1820</td><td>0.7780</td><td>--</td></tr>
-                            <tr class="highlight-row"><td>Vanilla MiniLM (Base)</td><td>0.0511</td><td>0.0314</td><td>0.1695</td><td>0.0347</td><td>0.1050</td><td>0.00160</td></tr>
-                            <tr class="highlight-row"><td>BiLSTM-ASLCB (Ours)</td><td>0.6449</td><td>0.2469</td><td>0.8893</td><td>0.2026</td><td>0.7553</td><td>0.00076</td></tr>
-                            <tr class="highlight-row"><td>Trans-ASLCB (Ours)</td><td>0.6394</td><td>0.2508</td><td>0.8810</td><td>0.2002</td><td>0.7608</td><td>0.00085</td></tr>
+                            <tr><td>ResNet50</td><td>Full Fine-tune</td><td>Strong</td><td>84.9 ± 0.5</td><td>1.52</td><td>23.71</td></tr>
+                            <tr><td>ResNet50</td><td>LLRD</td><td>Light</td><td>81.8 ± 0.5</td><td>1.52</td><td>23.71</td></tr>
+                            <tr class="highlight-row"><td>ViT-B/16</td><td>Full Fine-tune</td><td>Strong</td><td>87.8 ± 0.3</td><td>4.65</td><td>85.88</td></tr>
+                            <tr class="highlight-row"><td>ViT-B/16</td><td>LLRD (Best)</td><td>Light</td><td><b>88.9 ± 0.2</b></td><td>4.65</td><td>85.88</td></tr>
+                            <tr><td>Ensemble</td><td>Softmax Avg</td><td>Mixed</td><td>86.2 ± 0.3</td><td>~6.17</td><td>109.59</td></tr>
                         </tbody>
                     </table>
                 </div>
-                -->
+
                 <h4>Limitations</h4>
                 <ul>
-                    <li>Write here ........................................................</li>
-                    <li>And here ........................................................</li>
+                    <li>ResNet50 plateaus earlier than ViT, suggesting a lower capacity for complex fine-grained features.</li>
+                    <li>ViT models exhibit 3x higher inference latency, making them less ideal for real-time mobile deployment.</li>
                 </ul>
 
             
@@ -130,20 +127,19 @@
 
                 <div class="mb-16">
                     <h4 class="text-sky-600 font-bold mb-4 uppercase tracking-widest text-xs italic">
-                        <i class="fas fa-terminal mr-2"></i> Live Inference App
+                        <i class="fas fa-terminal mr-2"></i> Aircraft Variant Recognition
                     </h4>
                     <div class="max-w-4xl mx-auto shadow-2xl shadow-sky-200/50 rounded-[2rem] overflow-hidden border-2 border-sky-100 bg-white">
                         <div class="relative w-full" style="height: 600px;">
-                            <!-- Replace with your actual Streamlit app URL -->
                             <iframe 
-                                src="https://odoctagger-v1.streamlit.app/?embed=true" 
+                                src="https://huggingface.co/spaces/vuminhquan/fgvc-aircraft" 
                                 class="absolute top-0 left-0 w-full h-full border-none"
                                 allowfullscreen>
                             </iframe>
                         </div>
                     </div>
                     <p class="text-center text-slate-400 text-[11px] mt-4 italic">
-                        Note: The model might take a few seconds to warm up on the cloud server.
+                        Note: The demo allows you to upload an aircraft image and predict its variant using the trained ViT-B/16 model.
                     </p>
                 </div>
 
@@ -151,18 +147,18 @@
 
             <section id="eda" class="mt-32 pb-20">
                 <h2>📊 Exploratory Data Analysis (EDA)</h2>
-                <p>Exploratory Data Analysis on (Write here)...</p>
+                <p>Comprehensive analysis of the FGVC-Aircraft dataset structure, including variant distributions and visual feature mapping.</p>
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-8 mt-8">
                     <div class="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm">
-                        <p class="text-lg font-bold text-sky-500 uppercase mb-4">Data Distribution</p>
+                        <p class="text-lg font-bold text-sky-500 uppercase mb-4">Manufacturer Distribution</p>
                         <div class="aspect-video bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 italic">
-                            <img src="../../text_classification/result/eurlex/train_processed/data_dist.png" class="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500">
+                            <img src="../../image_classification/eda_reports/eda_manufacturer_dist.png" class="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500">
                         </div>
                     </div>
                     <div class="bg-white p-6 rounded-3xl border border-sky-100 shadow-sm">
-                        <p class="text-lg font-bold text-sky-500 uppercase mb-4">Covarriance matrix</p>
+                        <p class="text-lg font-bold text-sky-500 uppercase mb-4">Latent Feature Space (UMAP)</p>
                         <div class="aspect-video bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 italic">
-                            <img src="../../text_classification/result/eurlex/cov_matrix.png" class="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500">
+                            <img src="../../image_classification/eda_reports/eda_umap_features.png" class="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500">
                         </div>
                     </div>
                 </div>
@@ -172,7 +168,7 @@
     </div>
 
     <footer class="text-center py-10 text-sky-300 text-xs font-bold border-t border-sky-100">
-        &copy; 2026 HCMUT Deep Learning Team • Vũ Hoàng Tùng
+        &copy; 2026 HCMUT Deep Learning Team • Vũ Minh Quân
     </footer>
 
 </body>
