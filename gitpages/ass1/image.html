@@ -28,18 +28,13 @@
         li::before { content: ""; position: absolute; left: 0; top: 0.6rem; width: 8px; height: 8px; background: #3b82f6; border-radius: 2px; }
 
         .image-section { background: white; border-radius: 2rem; padding: 3rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); margin-bottom: 4rem; }
-        .grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
         
         .img-container { background: #f1f5f9; border-radius: 1.5rem; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease; }
         .img-container:hover { transform: translateY(-5px); }
         .img-container img { width: 100%; height: auto; display: block; }
-        .img-caption { padding: 1.25rem; font-size: 0.95rem; font-weight: 600; color: #1e40af; text-align: center; border-top: 1px solid #e2e8f0; background: #fff; }
+        .img-caption { padding: 1rem; font-size: 0.9rem; font-weight: 700; color: #1e40af; text-align: center; border-top: 1px solid #e2e8f0; background: #fff; }
         
-        .desc-text { font-size: 0.95rem; color: #64748b; margin-top: 0.5rem; line-height: 1.6; font-weight: 400; padding: 0 1.25rem 1.25rem; }
-
-        .performance-card { background: #eff6ff; border: 2px solid #dbeafe; border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; }
-        .stat-value { font-size: 2.5rem; font-weight: 800; color: #1d4ed8; }
-        .stat-label { font-size: 0.875rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; }
+        .desc-text { font-size: 0.9rem; color: #64748b; margin-top: 0.5rem; line-height: 1.6; font-weight: 400; padding: 0 1rem 1rem; }
 
         .pdf-link { display: inline-block; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 700; text-decoration: none; transition: background 0.3s; }
         .pdf-link:hover { background: #1e40af; }
@@ -72,120 +67,147 @@
         <section id="abstract">
             <h2>Project Overview</h2>
             <p>
-                Dự án này tập trung vào việc phân loại máy bay ở mức độ chi tiết (Fine-grained classification), một bài toán thách thức do sự tương đồng cực lớn giữa các dòng máy bay (ví dụ: Boeing 737-300 và 737-400). Chúng tôi thực hiện so sánh đối đầu giữa hai kiến trúc tiêu biểu: <b>ResNet50</b> (đại diện cho CNN truyền thống) và <b>ViT-B/16</b> (đại diện cho Transformer hiện đại). 
-            </p>
-            <p>
-                Kết quả cho thấy ViT kết hợp với chiến lược <b>Layer-wise Learning Rate Decay (LLRD)</b> đạt hiệu suất vượt trội, chứng minh rằng cơ chế Attention toàn cục giúp mô hình nắm bắt tốt hơn các đặc điểm hình thái phức tạp của máy bay.
+                Dự án này tập trung vào việc phân loại máy bay ở mức độ chi tiết (Fine-grained classification). Chúng tôi thực hiện so sánh đối đầu giữa hai kiến trúc tiêu biểu: <b>ResNet50</b> (CNN) và <b>ViT-B/16</b> (Vision Transformer). Kết quả cho thấy ViT kết hợp với chiến lược <b>Layer-wise Learning Rate Decay (LLRD)</b> đạt hiệu suất vượt trội.
             </p>
             <a href="../../reports/ass1_image.pdf" target="_blank" class="pdf-link">Download Full Report (PDF)</a>
         </section>
 
         <section id="eda" class="mt-32">
-            <h2>Exploratory Data Analysis</h2>
-            <p>Phân tích dữ liệu ban đầu giúp hiểu rõ sự phân bố và các đặc trưng hình học của tập dữ liệu Aircraft.</p>
+            <h2>1. Exploratory Data Analysis (EDA)</h2>
+            <p>Phân tích tập dữ liệu ban đầu để hiểu rõ sự phân bố và các đặc trưng hình thái của 100 loại máy bay.</p>
             
             <div class="image-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="img-container">
+                        <img src="../../image_classification/image/fig1.1.png" alt="Dataset Summary">
+                        <div class="img-caption">Figure 1.1: Dataset Summary</div>
+                        <p class="desc-text">Tổng quan về số lượng mẫu trong tập Train, Val và Test.</p>
+                    </div>
+                    <div class="img-container">
                         <img src="../../image_classification/image/fig1.3.png" alt="Manufacturer Distribution">
-                        <div class="img-caption">Manufacturer Distribution</div>
-                        <p class="desc-text">Biểu đồ cho thấy sự thống nhất về số lượng mẫu cho mỗi hãng sản xuất (Boeing, Airbus, Douglas,...), đảm bảo mô hình không bị thiên kiến quá mức vào một hãng cụ thể.</p>
+                        <div class="img-caption">Figure 1.3: Manufacturer Distribution</div>
+                        <p class="desc-text">Phân bố máy bay theo hãng sản xuất (Boeing, Airbus, ...).</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.4.png" alt="Split Distribution">
+                        <div class="img-caption">Figure 1.4: Split Distribution</div>
+                        <p class="desc-text">Sự cân bằng dữ liệu giữa các tập huấn luyện và kiểm thử.</p>
                     </div>
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.5.png" alt="UMAP Visualization">
-                        <div class="img-caption">Latent Feature Space (UMAP)</div>
-                        <p class="desc-text">Trực quan hóa không gian đặc trưng bằng UMAP cho thấy các cụm (clusters) máy bay bắt đầu hình thành rõ rệt, minh chứng cho khả năng phân tách của các đặc trưng học được.</p>
+                        <div class="img-caption">Figure 1.5: Latent Feature Space (UMAP)</div>
+                        <p class="desc-text">Trực quan hóa không gian đặc trưng bằng thuật toán UMAP.</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.6.png" alt="Data Samples">
-                        <div class="img-caption">Aircraft Data Samples</div>
-                        <p class="desc-text">Các mẫu ảnh trong tập dữ liệu với độ phân giải và góc chụp đa dạng.</p>
+                        <div class="img-caption">Figure 1.6: Aircraft Samples</div>
                     </div>
                     <div class="img-container">
-                        <img src="../../image_classification/image/fig1.7.png" alt="Edge Features">
-                        <div class="img-caption">Edge Detection Analysis</div>
-                        <p class="desc-text">Phân tích cạnh biên giúp xác định cấu trúc khung xương và hình dáng khí động học của máy bay.</p>
+                        <img src="../../image_classification/image/fig1.7.png" alt="Edge Detection">
+                        <div class="img-caption">Figure 1.7: Edge Detection</div>
                     </div>
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.8.png" alt="Color Histograms">
-                        <div class="img-caption">Color Histogram Distribution</div>
-                        <p class="desc-text">Phân tích màu sắc cho thấy hầu hết máy bay có tông màu trắng/xám chủ đạo trên nền trời xanh hoặc đường băng xám.</p>
+                        <div class="img-caption">Figure 1.8: Color Histograms</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="training" class="mt-32">
-            <h2>Training Dynamics</h2>
-            <p>Quá trình huấn luyện được theo dõi sát sao qua các chỉ số Accuracy và Loss để đảm bảo sự hội tụ tối ưu.</p>
+            <h2>2. Training & Performance</h2>
+            <p>Theo dõi quá trình hội tụ và so sánh hiệu năng giữa các chiến lược huấn luyện khác nhau.</p>
             
             <div class="image-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.16.png" alt="Accuracy Curves">
-                        <div class="img-caption">Training & Validation Accuracy</div>
-                        <p class="desc-text">Đồ thị cho thấy ViT-B/16 (màu đỏ) vượt qua ResNet (màu xanh) sau khoảng 30 epoch, thể hiện khả năng học các đặc trưng phức tạp tốt hơn về dài hạn.</p>
+                        <div class="img-caption">Figure 1.16: Accuracy Curves</div>
                     </div>
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.17.png" alt="Loss Curves">
-                        <div class="img-caption">Training & Validation Loss</div>
-                        <p class="desc-text">Hàm mất mát giảm ổn định và không có dấu hiệu Overfitting rõ rệt nhờ cơ chế Early Stopping và kỹ thuật Augmentation phù hợp.</p>
+                        <div class="img-caption">Figure 1.17: Loss Curves</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.16.5.png" alt="Acc Comparison">
+                        <div class="img-caption">Figure 1.16.5: Performance Step</div>
+                    </div>
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.18.png" alt="Metric Summary">
+                        <div class="img-caption">Figure 1.18: Metric Distribution</div>
+                    </div>
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.19.png" alt="Final Stats">
+                        <div class="img-caption">Figure 1.19: Final Accuracy Summary</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="interpretability" class="mt-32">
-            <h2>Model Interpretability</h2>
-            <p>Sử dụng Grad-CAM và Attention Rollout để "nhìn" vào bên trong bộ não của AI, hiểu được lý do tại sao nó đưa ra quyết định.</p>
+            <h2>3. Model Interpretability</h2>
+            <p>Sử dụng Grad-CAM và Attention Rollout để giải thích cách mô hình nhận diện vật thể.</p>
             
             <div class="image-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div class="img-container">
-                        <img src="../../image_classification/image/fig1.13.png" alt="Grad-CAM ResNet">
-                        <div class="img-caption">Grad-CAM (ResNet50)</div>
-                        <p class="desc-text">ResNet tập trung vào các đặc trưng cục bộ (Local features) như động cơ hoặc đuôi máy bay. Đây là cách tiếp cận truyền thống của CNN.</p>
+                        <img src="../../image_classification/image/fig1.13.png" alt="Grad-CAM">
+                        <div class="img-caption">Figure 1.13: Grad-CAM (ResNet50)</div>
+                        <p class="desc-text">Tập trung vào các bộ phận cục bộ như động cơ.</p>
                     </div>
                     <div class="img-container">
-                        <img src="../../image_classification/image/fig1.14.png" alt="Attention Rollout ViT">
-                        <div class="img-caption">Attention Rollout (ViT-B/16)</div>
-                        <p class="desc-text">ViT thể hiện sự tập trung vào toàn bộ hình dáng (Silhouette) của máy bay. Cơ chế Self-attention cho phép nó kết nối các phần khác nhau của ảnh một cách hệ thống.</p>
+                        <img src="../../image_classification/image/fig1.14.png" alt="Attention Rollout">
+                        <div class="img-caption">Figure 1.14: Attention Rollout (ViT-B/16)</div>
+                        <p class="desc-text">Tập trung vào hình dáng tổng thể của máy bay.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="results" class="mt-32 pb-40">
-            <h2>Detailed Results & Evaluation</h2>
-            <p>Đánh giá chi tiết hiệu suất của mô hình qua ma trận nhầm lẫn và các bảng chỉ số định lượng.</p>
+        <section id="detailed-results" class="mt-32 pb-40">
+            <h2>4. Detailed Results & Evaluation</h2>
+            <p>Phân tích sâu lỗi và so sánh các chiến lược LLRD qua bảng số liệu.</p>
             
             <div class="image-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.9.png" alt="Confusion Matrix ResNet">
-                        <div class="img-caption">Confusion Matrix (ResNet50)</div>
+                        <div class="img-caption">Figure 1.9: Confusion Matrix (ResNet50)</div>
                     </div>
                     <div class="img-container">
                         <img src="../../image_classification/image/fig1.10.png" alt="Confusion Matrix ViT">
-                        <div class="img-caption">Confusion Matrix (ViT-B/16)</div>
+                        <div class="img-caption">Figure 1.10: Confusion Matrix (ViT-B/16)</div>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.11.png" alt="Error Analysis">
+                        <div class="img-caption">Figure 1.11: Error Analysis</div>
+                    </div>
+                    <div class="img-container">
+                        <img src="../../image_classification/image/fig1.12.png" alt="Class-wise Accuracy">
+                        <div class="img-caption">Figure 1.12: Class-wise Accuracy</div>
+                    </div>
                     <div class="img-container">
                         <img src="../../image_classification/image/tab1.2.png" alt="Linear Probing">
-                        <div class="img-caption">Linear Probing Results</div>
-                    </div>
-                    <div class="img-container">
-                        <img src="../../image_classification/image/tab1.5.png" alt="LLRD Results">
-                        <div class="img-caption">Fine-tuning & LLRD Strategy Comparison</div>
+                        <div class="img-caption">Table 1.2: Linear Probing Stats</div>
                     </div>
                 </div>
-                <div class="mt-12 img-container">
-                    <img src="../../image_classification/image/fig1.12.png" alt="Class-wise Accuracy">
-                    <div class="img-caption">Class-wise Accuracy Analysis</div>
-                    <p class="desc-text">Biểu đồ cho thấy một số dòng máy bay hiếm hoặc có ngoại hình quá giống nhau vẫn là thách thức lớn nhất cho mô hình.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="img-container">
+                        <img src="../../image_classification/image/tab1.3.png" alt="Full FT">
+                        <div class="img-caption">Table 1.3: Full Fine-tuning Metrics</div>
+                    </div>
+                    <div class="img-container">
+                        <img src="../../image_classification/image/tab1.5.png" alt="LLRD Strategy">
+                        <div class="img-caption">Table 1.5: LLRD vs Full FT Comparison</div>
+                    </div>
                 </div>
             </div>
         </section>
