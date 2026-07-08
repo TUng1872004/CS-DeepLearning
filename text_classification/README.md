@@ -1,7 +1,7 @@
 # Odoc Tagger — Extreme Multi-Label Text Classification with Label-Wise Attention
 
 **Author:** Vũ Hoàng Tùng · HCMUT · 2026  
-**Full Report:** [`reports/ass1_text.pdf`](../reports/ass1_text.pdf)  
+**Full Report:** [`reports/ass1_text.pdf`](reports/ass1_text.pdf)  
 **Live Demo:** [odoctagger-v1.streamlit.app](https://odoctagger-v1.streamlit.app)
 
 ---
@@ -53,7 +53,7 @@ The core technique is **Label-Wise Attention (LWA)**: instead of compressing a d
 
 ---
 
-## Real-World Validation — Stack Exchange Student Questions
+## Real-Problem Validation — Stack Exchange Student Questions
 
 To test generalisation beyond the training corpus, the model was evaluated against **real questions posted by students on public Stack Exchange** (89,736 label decisions):
 
