@@ -12,7 +12,9 @@ jobs:
     steps:
       - name: Ping app
         run: |
+          jar=$(mktemp)
           code=$(curl -sSL -o /dev/null -w "%{http_code}" \
+            --cookie-jar "$jar" --cookie "$jar" \
             --retry 3 --retry-delay 10 --max-time 60 \
             "$URL")
           echo "HTTP $code from $URL"
